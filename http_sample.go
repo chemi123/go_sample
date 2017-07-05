@@ -7,17 +7,17 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 )
 
-func postHandler(w http.ResponseWriter, r *http.Request) {
+func postHandler1(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		fmt.Fprintf(w, "this is not post request\n")
 		return
 	}
-	fmt.Fprintf(w, "hello\n")
-	fmt.Fprintf(w, "content length: %v\n", r.ContentLength)
 
+	// bodyの読み方その1
 	// bufをbytes.Bufferでnewする
 	// newとは特定の型を0埋めして、その型のポインタを返す
 	buf := new(bytes.Buffer)
@@ -32,7 +32,22 @@ func postHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "content: %v\n", string(req))
 }
 
+func postHandler2(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "POST" {
+		fmt.Fprintf(w, "this is not post request\n")
+		return
+	}
+
+	// bodyの読み方その2
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Fprintf(w, "content: %v\n", string(body))
+}
+
 func main() {
-	http.HandleFunc("/post", postHandler)
+	http.HandleFunc("/post1", postHandler1)
+	http.HandleFunc("/post2", postHandler2)
 	http.ListenAndServe(":8080", nil)
 }
