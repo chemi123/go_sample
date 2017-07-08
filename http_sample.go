@@ -11,13 +11,13 @@ import (
 	"net/http"
 )
 
+// bodyの読み方その1
 func postHandler1(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		fmt.Fprintf(w, "this is not post request\n")
 		return
 	}
 
-	// bodyの読み方その1
 	// bufをbytes.Bufferでnewする
 	// newとは特定の型を0埋めして、その型のポインタを返す
 	buf := new(bytes.Buffer)
@@ -32,17 +32,19 @@ func postHandler1(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "content: %v\n", string(req))
 }
 
+// bodyの読み方その2
 func postHandler2(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		fmt.Fprintf(w, "this is not post request\n")
 		return
 	}
 
-	// bodyの読み方その2
+	// bodyはbyte型のスライス
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		panic(err)
 	}
+
 	fmt.Fprintf(w, "content: %v\n", string(body))
 }
 
