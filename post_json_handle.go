@@ -11,7 +11,7 @@ import (
 	"net/http"
 )
 
-func jsonHandler(w http.ResponseWriter, req *http.Request) {
+func jsonHandle(w http.ResponseWriter, req *http.Request) {
 	if req.Method != "POST" {
 		fmt.Fprintf(w, "Only takes post request\n")
 		return
@@ -54,6 +54,6 @@ func jsonHandler(w http.ResponseWriter, req *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/", jsonHandler)
+	http.HandleFunc("/", jsonHandle)
 	http.ListenAndServe(":8080", nil)
 }
