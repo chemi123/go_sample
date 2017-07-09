@@ -29,7 +29,7 @@ func jsonHandler(w http.ResponseWriter, req *http.Request) {
 	var i interface{}
 	err = json.Unmarshal(req_body, &i)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Fprintln(w, err)
 		return
 	}
 
