@@ -46,6 +46,13 @@ func main() {
 	tables = append(tables, *table1)
 	tables = append(tables, *table2)
 	tables = append(tables, *table3)
+
+	// 以下のやり方だとうまくいかなかった(要素に変更がなかったということ)
+	// おそらく理由はvに対してはtable要素のコピーが走っているから
+	// ポインタを渡せる方法があれば知りたい
+	// for i, v := range tables {
+	//         doManage(&v)
+	// }
 	for i, _ := range tables {
 		doManage(&tables[i])
 	}
