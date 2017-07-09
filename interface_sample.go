@@ -27,21 +27,31 @@ func (table *Table) addPlayer(num int) {
 }
 
 func doManage(manager TableManager) {
-	fmt.Println("Talbe:", manager.getTableID())
+	fmt.Println("Table:", manager.getTableID())
 	manager.addPlayer(-2)
 	fmt.Println(manager.countPlayer(), "players left")
 }
 
 func main() {
+	tables := make([]Table, 0)
+	fmt.Println(tables)
 	// 失敗する
 	// var table Table = &Table{1, 7}
 	// doManage(table)
 
 	// 成功する。何故？
-	table := &Table{1, 7}
-	doManage(table)
+	table1 := &Table{1, 7}
+	table2 := &Table{2, 8}
+	table3 := &Table{3, 9}
+	tables = append(tables, *table1)
+	tables = append(tables, *table2)
+	tables = append(tables, *table3)
+	for i, _ := range tables {
+		doManage(&tables[i])
+	}
 
-	// doManagerが呼び出された後に値が変更されている。
-	// doManagerはtableのポインタが渡されている？
-	fmt.Println("After doManage, table.Players:", table.Players)
+	// doManagerが呼び出された後に値が変更されていることを確認
+	for i, v := range tables {
+		fmt.Printf("After doManage, tables[%v].Players: %v\n", i, v.Players)
+	}
 }
