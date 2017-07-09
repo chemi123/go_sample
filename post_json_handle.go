@@ -17,24 +17,24 @@ func jsonHandler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	req_body, err := ioutil.ReadAll(req.Body)
+	reqBody, err := ioutil.ReadAll(req.Body)
 	if err != nil {
 		fmt.Fprintf(w, "Failed to read body\n")
 		return
 	}
 
 	// debug
-	fmt.Println("req_body:", string(req_body))
+	fmt.Println("reqBody:", string(reqBody))
 
 	var i interface{}
-	err = json.Unmarshal(req_body, &i)
+	err = json.Unmarshal(reqBody, &i)
 	if err != nil {
 		fmt.Fprintln(w, err)
 		return
 	}
 
-	body_map := i.(map[string]interface{})
-	for key, value := range body_map {
+	bodyMap := i.(map[string]interface{})
+	for key, value := range bodyMap {
 		switch v := value.(type) {
 		case string:
 			fmt.Println(key, "has string value", v)
