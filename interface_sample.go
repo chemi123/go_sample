@@ -27,22 +27,24 @@ func (table *Table) addPlayer(num int) {
 }
 
 func doManage(manager TableManager) {
-	fmt.Println("Table:", manager.getTableID())
 	manager.addPlayer(-2)
-	fmt.Println(manager.countPlayer(), "players left")
+	fmt.Printf("Table %v has %v players left.\n", manager.getTableID(), manager.countPlayer())
+}
+
+func newTable(id, players int) *Table {
+	return &Table{id, players}
 }
 
 func main() {
 	tables := make([]Table, 0)
-	fmt.Println(tables)
 	// 失敗する
 	// var table Table = &Table{1, 7}
 	// doManage(table)
 
 	// 成功する。何故？
-	table1 := &Table{1, 7}
-	table2 := &Table{2, 8}
-	table3 := &Table{3, 9}
+	table1 := newTable(1, 7)
+	table2 := newTable(2, 8)
+	table3 := newTable(3, 9)
 	tables = append(tables, *table1)
 	tables = append(tables, *table2)
 	tables = append(tables, *table3)
