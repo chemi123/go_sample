@@ -14,6 +14,11 @@ type Table struct {
 	ID, Players int
 }
 
+// embe sample
+type Desk struct {
+	*Table
+}
+
 func (table *Table) countPlayer() int {
 	return table.Players
 }
@@ -33,6 +38,10 @@ func doManage(manager TableManager) {
 
 func newTable(id, players int) *Table {
 	return &Table{id, players}
+}
+
+func newDesk(id, players int) *Desk {
+	return &Desk{Table: newTable(id, players)}
 }
 
 func main() {
@@ -63,4 +72,8 @@ func main() {
 	for i, v := range tables {
 		fmt.Printf("After doManage, tables[%v].Players: %v\n", i, v.Players)
 	}
+
+	// embedができているかの確認
+	desk := newDesk(4, 10)
+	doManage(desk)
 }
