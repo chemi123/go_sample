@@ -44,6 +44,11 @@ func newDesk(id, players int) *Desk {
 	return &Desk{Table: newTable(id, players)}
 }
 
+// Tableを埋め込んだDesk特有の関数
+func (desk Desk) getDeskInfo() {
+	fmt.Printf("Desck %v has %v players left.\n", desk.getTableID(), desk.countPlayer())
+}
+
 func main() {
 	tables := make([]Table, 0)
 	// 失敗する
@@ -76,4 +81,5 @@ func main() {
 	// embedができているかの確認
 	desk := newDesk(4, 10)
 	doManage(desk)
+	desk.getDeskInfo()
 }
