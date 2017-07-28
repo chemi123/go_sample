@@ -49,5 +49,5 @@ func NewDesk(id, players int) *Desk {
 
 // GetDeskInfo takes Desk receiver
 func (desk Desk) GetDeskInfo() {
-	fmt.Printf("Desck %v has %v players left.\n", desk.getTableID(), desk.countPlayer())
+	fmt.Printf("Desk %v has %v players left.\n", desk.getTableID(), desk.countPlayer())
 }
