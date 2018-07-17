@@ -42,6 +42,7 @@ func postHandler2(w http.ResponseWriter, r *http.Request) {
 	// bodyはbyte型のスライス
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
+		// 良くない
 		panic(err)
 	}
 
