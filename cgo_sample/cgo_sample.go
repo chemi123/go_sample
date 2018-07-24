@@ -12,5 +12,8 @@ func main() {
         a := C.num()
         fmt.Println(a)
         C.hoge()
+
+	str := C.CString("fuga")
+	C.fuga(str)
 }
 
