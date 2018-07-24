@@ -10,12 +10,21 @@ void hoge() {
   std::cout << str << std::endl;
 }
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-  void fuga(const std::string &fuga) {
-      std::cout << fuga << std::endl;
-  }
-#ifdef __cplusplus
+const char* fuga() {
+  return "fuga";
 }
-#endif
+
+void showGoString(const char* str) {
+  std::cout << str << std::endl;
+}
+
+void handler(const std::string& in, std::string& out) {
+  out = "response to : " + in;
+}
+
+const char* handlerInterface(const char* in) {
+  std::string response;
+  const std::string request = std::string(in);
+  handler(request, response);
+  return response.c_str();
+}
